@@ -12,7 +12,7 @@ public class HealthPowerup extends GameEntity implements Interactable {
 
     public HealthPowerup(Pane pane) {
         super(pane);
-        setImage(Globals.snakeBody);
+        setImage(Globals.health);
         pane.getChildren().add(this);
 
         Random rnd = new Random();
