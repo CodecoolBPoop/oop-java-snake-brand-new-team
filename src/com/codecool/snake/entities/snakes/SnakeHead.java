@@ -79,11 +79,10 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
-            Game game = new Game();
-            game.gameOver();
             System.out.println("Game Over");
             Globals.gameLoop.stop();
             Game.fiveSecondsWonder.stop();
+            Game.gameOver();
         }
     }
 

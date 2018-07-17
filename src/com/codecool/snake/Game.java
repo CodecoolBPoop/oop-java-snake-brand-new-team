@@ -88,7 +88,7 @@ public class Game extends Pane {
         spawnEnemies();
     }
 
-    public void gameOver() {
+    public static void gameOver() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         int score = Globals.score;
@@ -96,7 +96,7 @@ public class Game extends Pane {
         String s ="Press R to Restart";
         alert.setContentText(s);
         alert.show();
-        Globals.score = 0;
+
     }
 }
 
