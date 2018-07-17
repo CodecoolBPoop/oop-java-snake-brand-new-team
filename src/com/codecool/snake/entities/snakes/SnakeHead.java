@@ -6,13 +6,16 @@ import com.codecool.snake.Game;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import com.codecool.snake.Game;
+import javafx.util.Duration;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
+    private static float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private static int health;
@@ -32,6 +35,17 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (health<100) {
             health += 10;
         }
+    }
+
+    public static void setSpeed() {
+        speed = 4;
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(5000),
+                ae ->speed=2));
+        timeline.play();
+
+
+
     }
 
     public static int getHealth() {
