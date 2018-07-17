@@ -9,6 +9,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -68,16 +69,30 @@ public class Game extends Pane {
     }
 
     public void restartGame() {
+
         Globals.gameLoop.stop();
         Globals.gameObjects.clear();
         Globals.oldGameObjects.clear();
         Globals.newGameObjects.clear();
+        Globals.score = 0;
         fiveSecondsWonder.stop();
         this.getChildren().clear();
         start();
+        Globals.leftKeyDown  = false;
+        Globals.rightKeyDown  = false;
         new SnakeHead(this, 500, 500);
         spawnEnemies();
+    }
 
+    public void gameOver() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        int score = Globals.score;
+        alert.setHeaderText("Your score is: " + score);
+        String s ="Press R to Restart";
+        alert.setContentText(s);
+        alert.show();
+        Globals.score = 0;
     }
 }
 
