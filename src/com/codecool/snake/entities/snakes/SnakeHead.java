@@ -7,13 +7,14 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import com.codecool.snake.Game;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static final float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
-    private int health;
+    private static int health;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -25,6 +26,15 @@ public class SnakeHead extends GameEntity implements Animatable {
         pane.getChildren().add(this);
 
         addPart(4);
+    }
+    public void addHealth(){
+        if (health<100) {
+            health += 10;
+        }
+    }
+
+    public static int getHealth() {
+        return health;
     }
 
     public void step() {
@@ -56,6 +66,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
+            Game.fiveSecondsWonder.stop();
         }
     }
 
