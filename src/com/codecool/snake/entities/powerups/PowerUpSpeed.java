@@ -15,7 +15,7 @@ public class PowerUpSpeed extends GameEntity implements Interactable {
 
     public PowerUpSpeed(Pane pane) {
         super(pane);
-        setImage(Globals.snakeHead);
+        setImage(Globals.lightning);
         pane.getChildren().add(this);
 
         Random rnd = new Random();
