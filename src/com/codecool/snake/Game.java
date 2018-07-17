@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthPowerup;
+import com.codecool.snake.entities.powerups.PowerUpSpeed;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.animation.KeyFrame;
@@ -30,6 +31,7 @@ public class Game extends Pane {
         new SimplePowerup(Game.this);
         new SimpleEnemy(Game.this);
         new HealthPowerup(Game.this);
+        new PowerUpSpeed(Game.this);
 
          fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
 
@@ -38,6 +40,8 @@ public class Game extends Pane {
                 new SimplePowerup(Game.this);
                 new SimpleEnemy(Game.this);
                 new HealthPowerup(Game.this);
+                new PowerUpSpeed(Game.this);
+
                 }
         }));
         fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
