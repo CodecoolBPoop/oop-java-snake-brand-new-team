@@ -14,12 +14,12 @@ public class FollowingEnemy extends GameEntity implements Animatable, Interactab
     private Point2D heading;
     private static final int damage = 20;
 
-    protected SimpleEnemy(Pane pane) {
+    public FollowingEnemy(Pane pane) {
         super(pane);
         setImage(Globals.followingEnemy);
         pane.getChildren().add(this);
         int speed = 3;
-        double direction = ;
+        double direction = 90;
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
 
