@@ -15,14 +15,14 @@ import java.util.Random;
 public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
-    private static final int damage = 10;
+    private static final int damage = 30;
 
     public SimpleEnemy(Pane pane) {
         super(pane);
 
         setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);
-        int speed = 1;
+        int speed = 2;
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         if (getX() <= SnakeHead.actuallyPositionX & getX()-500 >= SnakeHead.actuallyPositionX + 1000) {

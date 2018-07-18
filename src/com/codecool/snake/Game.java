@@ -120,6 +120,7 @@ public class Game extends Pane {
     }
 
     public static void gameOver() {
+        randomSecondSpawn.stop();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         int score = Globals.score;
