@@ -13,4 +13,16 @@ public class Utils {
         Point2D heading = new Point2D(length * Math.sin(directionInRadians), - length * Math.cos(directionInRadians));
         return heading;
     }
+
+    public static Point2D getDirectionVectorToFollowSnake(double snakeX, double snakeY, double enemyX, double enemyY, double length) {
+        double xDiff = (snakeX - enemyX);
+        double yDiff = (snakeY - enemyY);
+        double hypotenuse = Math.sqrt(Math.pow(yDiff, 2) + Math.pow(xDiff, 2));
+
+        double xVectorLength = length * xDiff / hypotenuse;
+        double yVectorLength = length * yDiff / hypotenuse;
+        Point2D heading = new Point2D(xVectorLength, yVectorLength);
+
+        return heading;
+    }
 }
