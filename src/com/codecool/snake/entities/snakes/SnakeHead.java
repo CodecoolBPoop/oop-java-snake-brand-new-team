@@ -14,6 +14,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import static com.codecool.snake.Game.randomSecondSpawn;
+
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -104,6 +106,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
+            Globals.endGame = true;
             Game.gameOver();
         }
     }

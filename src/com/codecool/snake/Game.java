@@ -5,6 +5,7 @@ import com.codecool.snake.entities.enemies.FollowingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.*;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ public class Game extends Pane {
         scoreBar = new ScoreBar(this);
         snakeHead.setScore(scoreBar);
         scoreBar.setScore(snakeHead.getScore());
+        Globals.endGame = false;
         spawnEnemies();
 
     }
@@ -51,7 +53,7 @@ public class Game extends Pane {
         randomSpawn("circleEnemy", 5, 10);
     }
 
-    public void randomSpawn(String toSpawn, int timeFrom, int timeTo){
+    public void randomSpawn(String toSpawn, int timeFrom, int timeTo) {
         Random rand = new Random();
         int randomNumber = rand.nextInt(timeTo) + timeFrom;
         switch (toSpawn) {
@@ -99,7 +101,7 @@ public class Game extends Pane {
                 randomSecondSpawn = new Timeline(new KeyFrame(Duration.seconds(randomNumber), new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        new FollowingEnemy(Game.this);
+                        new CircleEnemy(Game.this);
                     }
                 }));
                 break;
@@ -131,7 +133,6 @@ public class Game extends Pane {
     }
 
     public void restartGame() {
-
         Globals.gameLoop.stop();
         Globals.gameObjects.clear();
         Globals.oldGameObjects.clear();
@@ -149,7 +150,7 @@ public class Game extends Pane {
         scoreBar = new ScoreBar(this);
         snakeHead.setScore(scoreBar);
         scoreBar.setScore(snakeHead.getScore());
-
+        Globals.endGame = false;
         start();
         new HealthPowerup(Game.this);
         new SimplePowerup(Game.this);
@@ -158,6 +159,8 @@ public class Game extends Pane {
     }
 
     public static void gameOver() {
+        Globals.endGame = true;
+        randomSecondSpawn.stop();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         int score = Globals.score;
@@ -165,7 +168,6 @@ public class Game extends Pane {
         String s ="Press R to Restart";
         alert.setContentText(s);
         alert.show();
-
     }
 }
 
