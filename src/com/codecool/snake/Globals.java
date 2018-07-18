@@ -28,13 +28,12 @@ public class Globals {
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
-    public static boolean restart = false;
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
     public static int score;
-    public static HealthBar healthBar;
+    public static boolean  endGame;
 
     static {
         gameObjects = new LinkedList<>();
