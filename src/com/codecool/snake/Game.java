@@ -14,11 +14,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import java.util.Random;
 
 
 public class Game extends Pane {
 
-    public static Timeline fiveSecondsWonder;
+    public static Timeline randomSecondSpawn;
 
     public Game() {
         new SnakeHead(this, 500, 500);
@@ -28,27 +29,57 @@ public class Game extends Pane {
 
     public void spawnEnemies() {
 
-        new SimplePowerup(Game.this);
-        new SimpleEnemy(Game.this);
         new HealthPowerup(Game.this);
+        new SimplePowerup(Game.this);
         new PowerUpSpeed(Game.this);
-
-         fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                new SimplePowerup(Game.this);
-                new SimpleEnemy(Game.this);
-                new HealthPowerup(Game.this);
-                new PowerUpSpeed(Game.this);
-
-                }
-        }));
-        fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-        fiveSecondsWonder.play();
-
-
+        new SimpleEnemy(Game.this);
+        randomSpawn("health", 10, 15);
+        randomSpawn("simple", 3, 6);
+        randomSpawn("speed", 5, 10);
+        randomSpawn("simpleEnemy", 1, 5);
     }
+
+    public void randomSpawn(String toSpawn, int timeFrom, int timeTo){
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(timeTo) + timeFrom;
+        switch (toSpawn) {
+            case "health":
+                randomSecondSpawn = new Timeline(new KeyFrame(Duration.seconds(randomNumber), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        new HealthPowerup(Game.this);
+                    }
+                }));
+                break;
+            case "simple":
+                randomSecondSpawn = new Timeline(new KeyFrame(Duration.seconds(randomNumber), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        new SimplePowerup(Game.this);
+                    }
+                }));
+                break;
+            case "speed":
+                randomSecondSpawn = new Timeline(new KeyFrame(Duration.seconds(randomNumber), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        new PowerUpSpeed(Game.this);
+                    }
+                }));
+                break;
+            case "simpleEnemy":
+                randomSecondSpawn = new Timeline(new KeyFrame(Duration.seconds(randomNumber), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        new SimpleEnemy(Game.this);
+                    }
+                }));
+                break;
+        }
+        randomSecondSpawn.setCycleCount(Timeline.INDEFINITE);
+        randomSecondSpawn.play();
+    }
+
 
     public void start() {
         Scene scene = getScene();
@@ -79,7 +110,7 @@ public class Game extends Pane {
         Globals.oldGameObjects.clear();
         Globals.newGameObjects.clear();
         Globals.score = 0;
-        fiveSecondsWonder.stop();
+        randomSecondSpawn.stop();
         this.getChildren().clear();
         start();
         Globals.leftKeyDown  = false;
