@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.FollowingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthBar;
 import com.codecool.snake.entities.powerups.HealthPowerup;
@@ -34,24 +35,16 @@ public class Game extends Pane {
 
     public void spawnEnemies() {
 
+        new FollowingEnemy(Game.this);
         new HealthPowerup(Game.this);
         new SimplePowerup(Game.this);
         new PowerUpSpeed(Game.this);
         new SimpleEnemy(Game.this);
-        if (Globals.restart == false) {
-            randomSpawn("health", 17, 20);
-            randomSpawn("simple", 3, 6);
-            randomSpawn("speed", 12, 18);
-            randomSpawn("simpleEnemy", 1, 5);
-        }
-        else {
-            randomSpawn("health", 1000, 1000);
-            randomSpawn("simple", 1000, 1000);
-            randomSpawn("speed", 1000, 1000);
-            randomSpawn("simpleEnemy", 1000, 1000);
-        }
-
-
+        randomSpawn("health", 17, 20);
+        randomSpawn("simple", 3, 6);
+        randomSpawn("speed", 12, 18);
+        randomSpawn("simpleEnemy", 1, 5);
+        randomSpawn("followingEnemy", 5, 20);
     }
 
     public void randomSpawn(String toSpawn, int timeFrom, int timeTo){
@@ -87,6 +80,14 @@ public class Game extends Pane {
                     @Override
                     public void handle(ActionEvent event) {
                         new SimpleEnemy(Game.this);
+                    }
+                }));
+                break;
+            case "followingEnemy":
+                randomSecondSpawn = new Timeline(new KeyFrame(Duration.seconds(randomNumber), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        new FollowingEnemy(Game.this);
                     }
                 }));
                 break;
@@ -140,7 +141,7 @@ public class Game extends Pane {
     }
 
     public static void gameOver() {
-        Globals.restart = true;
+        randomSecondSpawn.stop();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         int score = Globals.score;
