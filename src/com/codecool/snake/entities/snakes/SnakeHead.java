@@ -6,21 +6,30 @@ import com.codecool.snake.Game;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.powerups.HealthBar;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import com.codecool.snake.Game;
 import javafx.util.Duration;
+
+import static com.codecool.snake.Game.gameOver;
+import static com.codecool.snake.Game.randomSecondSpawn;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
-    private static int health;
     public static double actuallyPositionX;
     public static double actuallyPositionY;
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    private int health;
+    private HealthBar bar;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -35,7 +44,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
     public void addHealth(){
         if (health<100) {
-            health += 10;
+            changeHealth(10);
         }
     }
 
@@ -50,7 +59,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     }
 
-    public static int getHealth() {
+    public int getHealth() {
         return health;
     }
 
@@ -85,8 +94,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-            Game.fiveSecondsWonder.stop();
-            Game.gameOver();
+            randomSecondSpawn.stop();
+            Globals.restart = true;
+            gameOver();
         }
     }
 
@@ -99,5 +109,11 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
+        this.bar.setLife(health);
     }
+
+    public void setBar(HealthBar healthBar) {
+        this.bar = healthBar;
+    }
+
 }

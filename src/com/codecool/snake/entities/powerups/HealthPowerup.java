@@ -28,7 +28,7 @@ public class HealthPowerup extends GameEntity implements Interactable {
 
     @Override
     public String getMessage() {
-        return "Got health-up :)"+SnakeHead.getHealth();
+        return "Got health-up :)";
     }
 }
 

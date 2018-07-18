@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.powerups.HealthBar;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 
@@ -21,15 +22,19 @@ public class Globals {
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image lightning = new Image("lightning.png");
     public static Image health = new Image("health.png");
+    public static Image followingEnemy = new Image("following_enemy.png");
+    public static Image arrowHead = new Image("arrow.png");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
+    public static boolean restart = false;
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
     public static int score;
+    public static HealthBar healthBar;
 
     static {
         gameObjects = new LinkedList<>();
