@@ -44,6 +44,7 @@ public class Game extends Pane {
         randomSpawn("simple", 3, 6);
         randomSpawn("speed", 12, 18);
         randomSpawn("simpleEnemy", 1, 5);
+        randomSpawn("followingEnemy", 5, 20);
     }
 
     public void randomSpawn(String toSpawn, int timeFrom, int timeTo){
@@ -79,6 +80,14 @@ public class Game extends Pane {
                     @Override
                     public void handle(ActionEvent event) {
                         new SimpleEnemy(Game.this);
+                    }
+                }));
+                break;
+            case "followingEnemy":
+                randomSecondSpawn = new Timeline(new KeyFrame(Duration.seconds(randomNumber), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        new FollowingEnemy(Game.this);
                     }
                 }));
                 break;
