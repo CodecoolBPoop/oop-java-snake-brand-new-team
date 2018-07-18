@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.FollowingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.HealthBar;
 import com.codecool.snake.entities.powerups.HealthPowerup;
 import com.codecool.snake.entities.powerups.PowerUpSpeed;
 import com.codecool.snake.entities.powerups.SimplePowerup;
@@ -17,13 +18,17 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import java.util.Random;
 
-
 public class Game extends Pane {
 
     public static Timeline randomSecondSpawn;
+    SnakeHead snakeHead;
+    HealthBar healthBar;
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+        snakeHead= new SnakeHead(this, 500, 500);
+        healthBar = new HealthBar(this);
+        snakeHead.setBar(healthBar);
+        healthBar.setLife(snakeHead.getHealth());
         spawnEnemies();
 
     }
@@ -81,7 +86,6 @@ public class Game extends Pane {
         randomSecondSpawn.setCycleCount(Timeline.INDEFINITE);
         randomSecondSpawn.play();
     }
-
 
     public void start() {
         Scene scene = getScene();
