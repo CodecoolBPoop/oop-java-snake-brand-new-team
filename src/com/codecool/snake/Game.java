@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.HealthBar;
 import com.codecool.snake.entities.powerups.HealthPowerup;
 import com.codecool.snake.entities.powerups.PowerUpSpeed;
 import com.codecool.snake.entities.powerups.SimplePowerup;
@@ -19,13 +20,17 @@ import javafx.util.Duration;
 public class Game extends Pane {
 
     public static Timeline fiveSecondsWonder;
+    SnakeHead snakeHead;
+    HealthBar healthBar;
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+        snakeHead= new SnakeHead(this, 500, 500);
+        healthBar = new HealthBar(this);
+        snakeHead.setBar(healthBar);
+        healthBar.setLife(snakeHead.getHealth());
         spawnEnemies();
 
     }
-
     public void spawnEnemies() {
 
         new SimplePowerup(Game.this);
