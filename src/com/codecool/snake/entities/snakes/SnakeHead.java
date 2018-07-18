@@ -13,17 +13,24 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import static com.codecool.snake.Game.gameOver;
+import static com.codecool.snake.Game.randomSecondSpawn;
+
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
-    private static int health;
     public static double actuallyPositionX;
     public static double actuallyPositionY;
-    private int health;
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    private int health;
     private HealthBar bar;
+
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
@@ -87,8 +94,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-            Game.randomSecondSpawn.stop();
-            Game.gameOver();
+            randomSecondSpawn.stop();
+            Globals.restart = true;
+            gameOver();
         }
     }
 
