@@ -6,6 +6,7 @@ import com.codecool.snake.Game;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.powerups.HealthBar;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
@@ -20,7 +21,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static int health;
     public static double actuallyPositionX;
     public static double actuallyPositionY;
+    private int health;
 
+    private HealthBar bar;
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
@@ -34,7 +37,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
     public void addHealth(){
         if (health<100) {
-            health += 10;
+            changeHealth(10);
         }
     }
 
@@ -49,7 +52,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     }
 
-    public static int getHealth() {
+    public int getHealth() {
         return health;
     }
 
@@ -98,5 +101,11 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
+        this.bar.setLife(health);
     }
+
+    public void setBar(HealthBar healthBar) {
+        this.bar = healthBar;
+    }
+
 }
