@@ -25,7 +25,13 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         int speed = 1;
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
+        if (getX() <= SnakeHead.actuallyPositionX & getX()-500 >= SnakeHead.actuallyPositionX + 1000) {
+            setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
+        }
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        if (getY() <= SnakeHead.actuallyPositionY & getY()-500 >= SnakeHead.actuallyPositionY + 1000) {
+            setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        }
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
