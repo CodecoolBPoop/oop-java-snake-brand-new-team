@@ -125,13 +125,19 @@ public class Game extends Pane {
         Globals.oldGameObjects.clear();
         Globals.newGameObjects.clear();
         Globals.score = 0;
-        randomSecondSpawn.stop();
         this.getChildren().clear();
-        start();
         Globals.leftKeyDown  = false;
         Globals.rightKeyDown  = false;
-        new SnakeHead(this, 500, 500);
-        spawnEnemies();
+        SnakeHead snakeHead = new SnakeHead(this, 500, 500);
+        snakeHead.setHealth(100);
+        HealthBar healthBar = new HealthBar(this);
+        snakeHead.setBar(healthBar);
+        healthBar.setLife(snakeHead.getHealth());
+        start();
+        new HealthPowerup(Game.this);
+        new SimplePowerup(Game.this);
+        new PowerUpSpeed(Game.this);
+        new SimpleEnemy(Game.this);
     }
 
     public static void gameOver() {
