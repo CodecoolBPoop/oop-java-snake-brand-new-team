@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.CircleEnemy;
 import com.codecool.snake.entities.enemies.FollowingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthBar;
@@ -40,6 +41,7 @@ public class Game extends Pane {
         new SimplePowerup(Game.this);
         new PowerUpSpeed(Game.this);
         new SimpleEnemy(Game.this);
+        new CircleEnemy(Game.this);
         randomSpawn("health", 17, 20);
         randomSpawn("simple", 3, 6);
         randomSpawn("speed", 12, 18);
