@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.CircleEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthPowerup;
 import com.codecool.snake.entities.powerups.PowerUpSpeed;
@@ -32,6 +33,7 @@ public class Game extends Pane {
         new SimpleEnemy(Game.this);
         new HealthPowerup(Game.this);
         new PowerUpSpeed(Game.this);
+        new CircleEnemy(Game.this);
 
          fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
 
@@ -41,6 +43,7 @@ public class Game extends Pane {
                 new SimpleEnemy(Game.this);
                 new HealthPowerup(Game.this);
                 new PowerUpSpeed(Game.this);
+                new CircleEnemy(Game.this);
 
                 }
         }));
