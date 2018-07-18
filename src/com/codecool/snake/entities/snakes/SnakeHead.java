@@ -11,7 +11,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import com.codecool.snake.Game;
 import javafx.util.Duration;
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -19,6 +18,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
+    private static int health;
+    public static double actuallyPositionX;
+    public static double actuallyPositionY;
     private int health;
 
     private HealthBar bar;
@@ -66,7 +68,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         setRotate(dir);
         Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
+        actuallyPositionX = getX();
         setY(getY() + heading.getY());
+        actuallyPositionY = getY();
 
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
@@ -83,7 +87,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-            Game.fiveSecondsWonder.stop();
+            Game.randomSecondSpawn.stop();
             Game.gameOver();
         }
     }
@@ -103,5 +107,5 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void setBar(HealthBar healthBar) {
         this.bar = healthBar;
     }
-    
+
 }
