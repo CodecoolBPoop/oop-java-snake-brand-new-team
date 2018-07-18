@@ -7,14 +7,13 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.powerups.HealthBar;
+import com.codecool.snake.entities.powerups.ScoreBar;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import static com.codecool.snake.Game.gameOver;
-import static com.codecool.snake.Game.randomSecondSpawn;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -27,9 +26,15 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void setHealth(int health) {
         this.health = health;
     }
+    public void setScore(int score) {
+        Globals.score = score;
+    }
+
 
     private int health;
+
     private HealthBar bar;
+    private ScoreBar score;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -62,6 +67,11 @@ public class SnakeHead extends GameEntity implements Animatable {
     public int getHealth() {
         return health;
     }
+    public int getScore() {
+        return Globals.score;
+    }
+
+
 
     public void step() {
         double dir = getRotate();
@@ -94,9 +104,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-            randomSecondSpawn.stop();
-            Globals.restart = true;
-            gameOver();
+            Game.gameOver();
         }
     }
 
@@ -112,8 +120,18 @@ public class SnakeHead extends GameEntity implements Animatable {
         this.bar.setLife(health);
     }
 
+    public void changeScore(int diff) {
+        Globals.score += diff;
+        this.score.setScore(Globals.score);
+    }
+
     public void setBar(HealthBar healthBar) {
         this.bar = healthBar;
     }
+
+    public void setScore(ScoreBar scoreBar) {
+        this.score = scoreBar;
+    }
+
 
 }

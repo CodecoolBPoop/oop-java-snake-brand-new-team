@@ -3,10 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.enemies.CircleEnemy;
 import com.codecool.snake.entities.enemies.FollowingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
-import com.codecool.snake.entities.powerups.HealthBar;
-import com.codecool.snake.entities.powerups.HealthPowerup;
-import com.codecool.snake.entities.powerups.PowerUpSpeed;
-import com.codecool.snake.entities.powerups.SimplePowerup;
+import com.codecool.snake.entities.powerups.*;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,12 +21,16 @@ public class Game extends Pane {
     public static Timeline randomSecondSpawn;
     SnakeHead snakeHead;
     HealthBar healthBar;
+    ScoreBar scoreBar;
 
     public Game() {
         snakeHead= new SnakeHead(this, 500, 500);
         healthBar = new HealthBar(this);
         snakeHead.setBar(healthBar);
         healthBar.setLife(snakeHead.getHealth());
+        scoreBar = new ScoreBar(this);
+        snakeHead.setScore(scoreBar);
+        scoreBar.setScore(snakeHead.getScore());
         spawnEnemies();
 
     }
@@ -141,9 +142,14 @@ public class Game extends Pane {
         Globals.rightKeyDown  = false;
         SnakeHead snakeHead = new SnakeHead(this, 500, 500);
         snakeHead.setHealth(100);
+        snakeHead.setScore(0);
         HealthBar healthBar = new HealthBar(this);
         snakeHead.setBar(healthBar);
         healthBar.setLife(snakeHead.getHealth());
+        scoreBar = new ScoreBar(this);
+        snakeHead.setScore(scoreBar);
+        scoreBar.setScore(snakeHead.getScore());
+
         start();
         new HealthPowerup(Game.this);
         new SimplePowerup(Game.this);
@@ -152,7 +158,6 @@ public class Game extends Pane {
     }
 
     public static void gameOver() {
-        randomSecondSpawn.stop();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         int score = Globals.score;
