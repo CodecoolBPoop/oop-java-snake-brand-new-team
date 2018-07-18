@@ -10,7 +10,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import com.codecool.snake.Game;
 import javafx.util.Duration;
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -85,7 +84,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-            Game.fiveSecondsWonder.stop();
+            Game.randomSecondSpawn.stop();
             Game.gameOver();
         }
     }
