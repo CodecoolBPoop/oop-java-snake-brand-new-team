@@ -33,9 +33,9 @@ public class Game extends Pane {
         new SimplePowerup(Game.this);
         new PowerUpSpeed(Game.this);
         new SimpleEnemy(Game.this);
-        randomSpawn("health", 10, 15);
+        randomSpawn("health", 17, 20);
         randomSpawn("simple", 3, 6);
-        randomSpawn("speed", 5, 10);
+        randomSpawn("speed", 12, 18);
         randomSpawn("simpleEnemy", 1, 5);
     }
 
