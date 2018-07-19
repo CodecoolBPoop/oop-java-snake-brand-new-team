@@ -14,6 +14,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -23,11 +26,13 @@ public class SnakeHead extends GameEntity implements Animatable {
     public static double firstSnakePositionX;
     public static double firstSnakePositionY;
 
+    private static List<GameEntity> tailList = new ArrayList<>();
+
     public void setHealth(int health) {
         this.health = health;
     }
     public void setScore(int score) {
-        Globals.score = score;
+        Globals.score1 = score;
     }
 
 
@@ -68,7 +73,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         return health;
     }
     public int getScore() {
-        return Globals.score;
+        return Globals.score1;
     }
 
 
@@ -103,8 +108,11 @@ public class SnakeHead extends GameEntity implements Animatable {
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
-            Globals.gameLoop.stop();
-            Globals.endGame = true;
+            destroy();
+            for (GameEntity tails : tailList){
+                tails.destroy();
+            }
+            Globals.firstSnakeDead = true;
             Game.gameOver();
         }
     }
@@ -112,6 +120,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
+            tailList.add(newPart);
             tail = newPart;
         }
     }
@@ -122,8 +131,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void changeScore(int diff) {
-        Globals.score += diff;
-        this.score.setScore(Globals.score);
+        Globals.score1 += diff;
+        this.score.setScore(Globals.score1);
     }
 
     public void setBar(HealthBar healthBar) {

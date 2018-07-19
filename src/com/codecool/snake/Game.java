@@ -29,6 +29,17 @@ public class Game extends Pane {
     ScoreBar scoreBar2;
 
     public Game() {
+        CreateSnakes();
+        spawnEnemies();
+
+    }
+
+    private void CreateSnakes(){
+        createFirstSnake();
+        createSecondSnake();
+    }
+
+    public void createFirstSnake(){
         snakeHead1 = new SnakeHead(this, 500, 500);
         healthBar1 = new HealthBar(this, 30, 30);
         snakeHead1.setBar(healthBar1);
@@ -36,7 +47,10 @@ public class Game extends Pane {
         scoreBar1 = new ScoreBar(this, 100, 30);
         snakeHead1.setScore(scoreBar1);
         scoreBar1.setScore(snakeHead1.getScore());
+        Globals.firstSnakeDead = false;
+    }
 
+    public void createSecondSnake(){
         snakeHead2 = new SnakeHead2(this, 700, 500);
         healthBar2 = new HealthBar(this, 200, 30);
         snakeHead2.setBar(healthBar2);
@@ -44,8 +58,7 @@ public class Game extends Pane {
         scoreBar2 = new ScoreBar(this, 300, 30);
         snakeHead2.setScore(scoreBar2);
         scoreBar2.setScore(snakeHead2.getScore());
-        spawnEnemies();
-
+        Globals.secondSnakeDead = false;
     }
 
     public void spawnEnemies() {
@@ -152,20 +165,14 @@ public class Game extends Pane {
         Globals.gameObjects.clear();
         Globals.oldGameObjects.clear();
         Globals.newGameObjects.clear();
-        Globals.score = 0;
+        //Globals.score = 0;
         this.getChildren().clear();
+
+        CreateSnakes();
+
         Globals.leftKeyDown  = false;
         Globals.rightKeyDown  = false;
-        SnakeHead snakeHead = new SnakeHead(this, 500, 500);
-        snakeHead.setHealth(100);
-        snakeHead.setScore(0);
-        HealthBar healthBar = new HealthBar(this, 30, 30);
-        snakeHead.setBar(healthBar);
-        healthBar.setLife(snakeHead.getHealth());
-        scoreBar1 = new ScoreBar(this, 300, 30);
-        snakeHead.setScore(scoreBar1);
-        scoreBar1.setScore(snakeHead.getScore());
-        Globals.endGame = false;
+
         start();
         new HealthPowerup(Game.this);
         new SimplePowerup(Game.this);
@@ -174,15 +181,17 @@ public class Game extends Pane {
     }
 
     public static void gameOver() {
-        Globals.endGame = true;
-        randomSecondSpawn.stop();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Game Over");
-        int score = Globals.score;
-        alert.setHeaderText("Your score is: " + score);
-        String s ="Press R to Restart";
-        alert.setContentText(s);
-        alert.show();
+        if (Globals.secondSnakeDead && Globals.firstSnakeDead) {
+            Globals.gameLoop.stop();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Game Over");
+            int score1 = Globals.score1;
+            int score2 = Globals.score2;
+            alert.setHeaderText("Player 1's score: " + score1 + "\n" + "Player 2's score: " + score2);
+            String s = "Press R to Restart";
+            alert.setContentText(s);
+            alert.show();
+        }
     }
 }
 
