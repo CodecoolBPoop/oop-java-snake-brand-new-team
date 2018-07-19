@@ -206,7 +206,7 @@ public class Game extends Pane {
         alert.setTitle("Game Over");
         int score1 = Globals.score1;
         int score2 = Globals.score2;
-        alert.setHeaderText("Player 1's score: " + score1 + "\n" + "Player 2's score: " + score2);
+        alert.setHeaderText("Green player's score: " + score1 + "\n" + "Red player's score: " + score2);
         String s = "Press R to Restart";
         alert.setContentText(s);
         alert.show();
