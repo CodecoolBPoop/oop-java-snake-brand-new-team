@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,6 +37,7 @@ public class Main extends Application {
                 secondaryLayout.getChildren().add(secondLabel);
 
                 Game game = new Game(2);
+                game.setTableBackground(new Image("grass.png"));
                 Scene secondScene = new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
                 // New window (Stage)
@@ -72,6 +74,7 @@ public class Main extends Application {
                 secondaryLayout.getChildren().add(secondLabel);
 
                 Game game = new Game(1);
+                game.setTableBackground(new Image("grass.png"));
                 Scene secondScene = new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
                 // New window (Stage)
