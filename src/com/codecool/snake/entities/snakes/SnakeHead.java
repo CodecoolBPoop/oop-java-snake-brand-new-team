@@ -127,7 +127,7 @@ public class SnakeHead extends GameEntity implements Animatable, Interactable {
 
     public void changeHealth(int diff) {
         health += diff;
-        this.bar.setLife(health);
+        this.bar.setLife(health, "Green player: ");
     }
 
     public void changeScore(int diff) {

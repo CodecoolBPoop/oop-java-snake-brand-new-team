@@ -1,6 +1,7 @@
 package com.codecool.snake.entities.powerups;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class ScoreBar {
     Label scoreLabel;
@@ -20,5 +21,7 @@ public class ScoreBar {
 
     public void setScore(int score) {
         this.scoreLabel.setText(score + " score");
+        this.scoreLabel.setTextFill(Color.WHITE);
+        this.scoreLabel.setStyle("-fx-font-weight: bold");
     }
 }

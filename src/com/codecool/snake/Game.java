@@ -12,8 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 import java.util.Random;
 
@@ -48,8 +49,8 @@ public class Game extends Pane {
         snakeHead1 = new SnakeHead(this, 500, 500);
         healthBar1 = new HealthBar(this, 30, 30);
         snakeHead1.setBar(healthBar1);
-        healthBar1.setLife(snakeHead1.getHealth());
-        scoreBar1 = new ScoreBar(this, 100, 30);
+        healthBar1.setLife(snakeHead1.getHealth(), "Green player: ");
+        scoreBar1 = new ScoreBar(this, 230, 30);
         snakeHead1.setScore(scoreBar1);
         scoreBar1.setScore(snakeHead1.getScore());
         Globals.firstSnakeDead = false;
@@ -57,10 +58,10 @@ public class Game extends Pane {
 
     public void createSecondSnake(){
         snakeHead2 = new SnakeHead2(this, 700, 500);
-        healthBar2 = new HealthBar(this, 200, 30);
+        healthBar2 = new HealthBar(this, 500, 30);
         snakeHead2.setBar(healthBar2);
-        healthBar2.setLife(snakeHead2.getHealth());
-        scoreBar2 = new ScoreBar(this, 300, 30);
+        healthBar2.setLife(snakeHead2.getHealth(), "Red player: ");
+        scoreBar2 = new ScoreBar(this, 700, 30);
         snakeHead2.setScore(scoreBar2);
         scoreBar2.setScore(snakeHead2.getScore());
         Globals.secondSnakeDead = false;
@@ -209,6 +210,12 @@ public class Game extends Pane {
         String s = "Press R to Restart";
         alert.setContentText(s);
         alert.show();
+    }
+
+    public void setTableBackground(Image tableBackground) {
+        setBackground(new Background(new BackgroundImage(tableBackground,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
     }
 }
 
