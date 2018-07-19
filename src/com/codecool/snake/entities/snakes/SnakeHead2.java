@@ -47,7 +47,7 @@ public class SnakeHead2 extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
-        setImage(Globals.snakeHead);
+        setImage(Globals.snakeHead2);
         pane.getChildren().add(this);
 
         addPart(4);
