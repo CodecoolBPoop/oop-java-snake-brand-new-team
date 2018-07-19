@@ -1,8 +1,13 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
+import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.snakes.SnakeHead2;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
+import static com.codecool.snake.Globals.snakeHead;
+import static sun.audio.AudioPlayer.player;
 
 // The base class for every game entity.
 public abstract class GameEntity extends ImageView {

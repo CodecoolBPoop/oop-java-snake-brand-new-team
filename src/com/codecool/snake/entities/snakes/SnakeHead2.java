@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SnakeHead2 extends GameEntity implements Animatable {
+public class SnakeHead2 extends GameEntity implements Animatable, Interactable {
 
     private static float speed = 2;
     private static final float turnRate = 2;
@@ -142,6 +142,29 @@ public class SnakeHead2 extends GameEntity implements Animatable {
 
     public void setScore(ScoreBar scoreBar) {
         this.score = scoreBar;
+    }
+
+    @Override
+    public void apply(SnakeHead snakeHead) {
+        if (Globals.score1 > Globals.score2) {
+            destroy();
+            for (GameEntity tails : tailList) {
+                tails.destroy();
+            }
+            Globals.secondSnakeDead = true;
+        }
+
+    }
+
+
+    @Override
+    public void apply(SnakeHead2 head2) {
+
+        }
+
+
+    public String  getMessage(){
+        return "ok";
     }
 
 
