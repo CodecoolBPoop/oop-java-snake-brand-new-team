@@ -1,10 +1,10 @@
 package com.codecool.snake.entities.snakes;
 
-import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.Globals;
 import com.codecool.snake.Game;
-import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
+import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.powerups.HealthBar;
 import com.codecool.snake.entities.powerups.ScoreBar;
@@ -15,13 +15,13 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 
-public class SnakeHead extends GameEntity implements Animatable {
+public class SnakeHead2 extends GameEntity implements Animatable {
 
     private static float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
-    public static double firstSnakePositionX;
-    public static double firstSnakePositionY;
+    public static double secondSnakePositionX;
+    public static double secondSnakePositionY;
 
     public void setHealth(int health) {
         this.health = health;
@@ -36,7 +36,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private HealthBar bar;
     private ScoreBar score;
 
-    public SnakeHead(Pane pane, int xc, int yc) {
+    public SnakeHead2(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
         setY(yc);
@@ -75,19 +75,19 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void step() {
         double dir = getRotate();
-        if (Globals.leftKeyDown) {
+        if (Globals.aKeyDown) {
             dir = dir - turnRate;
         }
-        if (Globals.rightKeyDown) {
+        if (Globals.dKeyDown) {
             dir = dir + turnRate;
         }
         // set rotation and position
         setRotate(dir);
         Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
-        firstSnakePositionX = getX();
+        secondSnakePositionX = getX();
         setY(getY() + heading.getY());
-        firstSnakePositionY = getY();
+        secondSnakePositionY = getY();
 
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {

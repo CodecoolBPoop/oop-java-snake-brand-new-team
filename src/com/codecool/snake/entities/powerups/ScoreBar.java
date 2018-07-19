@@ -6,10 +6,10 @@ public class ScoreBar {
     Label scoreLabel;
 
 
-    public ScoreBar(Pane pane) {
+    public ScoreBar(Pane pane, int x, int y) {
         scoreLabel = new Label();
-        scoreLabel.setLayoutX(100);
-        scoreLabel.setLayoutY(30);
+        scoreLabel.setLayoutX(x);
+        scoreLabel.setLayoutY(y);
         pane.getChildren().add(scoreLabel);
 
     }

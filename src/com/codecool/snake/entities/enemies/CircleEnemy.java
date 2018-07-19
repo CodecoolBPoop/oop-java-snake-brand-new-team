@@ -6,6 +6,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.snakes.SnakeHead2;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import java.util.Random;
@@ -25,11 +26,11 @@ public class CircleEnemy extends GameEntity implements Animatable, Interactable 
         this.speed = 3;
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        if (getX() <= SnakeHead.actuallyPositionX & getX()-500 >= SnakeHead.actuallyPositionX + 1000) {
+        if (getX() <= SnakeHead.firstSnakePositionX & getX()-500 >= SnakeHead.firstSnakePositionX + 1000) {
             setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         }
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-        if (getY() <= SnakeHead.actuallyPositionY & getY()-500 >= SnakeHead.actuallyPositionY + 1000) {
+        if (getY() <= SnakeHead.firstSnakePositionY & getY()-500 >= SnakeHead.firstSnakePositionY + 1000) {
             setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
         }
         double direction = rnd.nextDouble() * 360;
@@ -50,6 +51,12 @@ public class CircleEnemy extends GameEntity implements Animatable, Interactable 
     @Override
     public void apply(SnakeHead player) {
         player.changeHealth(-damage);
+        destroy();
+    }
+
+    @Override
+    public void apply(SnakeHead2 snakeHead) {
+        snakeHead.changeHealth(-damage);
         destroy();
     }
 

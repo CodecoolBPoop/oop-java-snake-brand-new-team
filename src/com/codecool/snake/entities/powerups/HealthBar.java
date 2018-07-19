@@ -7,10 +7,10 @@ public class HealthBar  {
     Label lifeLabel;
 
 
-    public HealthBar(Pane pane) {
+    public HealthBar(Pane pane, int x, int y) {
         lifeLabel = new Label();
-        lifeLabel.setLayoutX(30);
-        lifeLabel.setLayoutY(30);
+        lifeLabel.setLayoutX(x);
+        lifeLabel.setLayoutY(y);
         pane.getChildren().add(lifeLabel);
 
     }

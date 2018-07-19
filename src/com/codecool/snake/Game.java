@@ -5,7 +5,7 @@ import com.codecool.snake.entities.enemies.FollowingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.*;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import javafx.animation.Animation.Status;
+import com.codecool.snake.entities.snakes.SnakeHead2;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -20,19 +20,30 @@ import java.util.Random;
 public class Game extends Pane {
 
     public static Timeline randomSecondSpawn;
-    SnakeHead snakeHead;
-    HealthBar healthBar;
-    ScoreBar scoreBar;
+    SnakeHead snakeHead1;
+    HealthBar healthBar1;
+    ScoreBar scoreBar1;
+
+    SnakeHead2 snakeHead2;
+    HealthBar healthBar2;
+    ScoreBar scoreBar2;
 
     public Game() {
-        snakeHead= new SnakeHead(this, 500, 500);
-        healthBar = new HealthBar(this);
-        snakeHead.setBar(healthBar);
-        healthBar.setLife(snakeHead.getHealth());
-        scoreBar = new ScoreBar(this);
-        snakeHead.setScore(scoreBar);
-        scoreBar.setScore(snakeHead.getScore());
-        Globals.endGame = false;
+        snakeHead1 = new SnakeHead(this, 500, 500);
+        healthBar1 = new HealthBar(this, 30, 30);
+        snakeHead1.setBar(healthBar1);
+        healthBar1.setLife(snakeHead1.getHealth());
+        scoreBar1 = new ScoreBar(this, 100, 30);
+        snakeHead1.setScore(scoreBar1);
+        scoreBar1.setScore(snakeHead1.getScore());
+
+        snakeHead2 = new SnakeHead2(this, 700, 500);
+        healthBar2 = new HealthBar(this, 200, 30);
+        snakeHead2.setBar(healthBar2);
+        healthBar2.setLife(snakeHead2.getHealth());
+        scoreBar2 = new ScoreBar(this, 300, 30);
+        snakeHead2.setScore(scoreBar2);
+        scoreBar2.setScore(snakeHead2.getScore());
         spawnEnemies();
 
     }
@@ -116,6 +127,8 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
                 case RIGHT: Globals.rightKeyDown  = true; break;
+                case A: Globals.aKeyDown = true; break;
+                case D: Globals.dKeyDown = true; break;
             }
         });
 
@@ -123,6 +136,8 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = false; break;
                 case RIGHT: Globals.rightKeyDown  = false; break;
+                case A: Globals.aKeyDown = false; break;
+                case D: Globals.dKeyDown = false; break;
             }
             if (event.getCode() == KeyCode.R) {
                 restartGame();
@@ -144,12 +159,12 @@ public class Game extends Pane {
         SnakeHead snakeHead = new SnakeHead(this, 500, 500);
         snakeHead.setHealth(100);
         snakeHead.setScore(0);
-        HealthBar healthBar = new HealthBar(this);
+        HealthBar healthBar = new HealthBar(this, 30, 30);
         snakeHead.setBar(healthBar);
         healthBar.setLife(snakeHead.getHealth());
-        scoreBar = new ScoreBar(this);
-        snakeHead.setScore(scoreBar);
-        scoreBar.setScore(snakeHead.getScore());
+        scoreBar1 = new ScoreBar(this, 300, 30);
+        snakeHead.setScore(scoreBar1);
+        scoreBar1.setScore(snakeHead.getScore());
         Globals.endGame = false;
         start();
         new HealthPowerup(Game.this);
