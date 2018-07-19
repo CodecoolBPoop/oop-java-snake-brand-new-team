@@ -4,6 +4,7 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.snakes.SnakeHead2;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
@@ -22,6 +23,12 @@ public class HealthPowerup extends GameEntity implements Interactable {
 
     @Override
     public void apply(SnakeHead snakeHead) {
+        snakeHead.addHealth();
+        destroy();
+    }
+
+    @Override
+    public void apply(SnakeHead2 snakeHead) {
         snakeHead.addHealth();
         destroy();
     }

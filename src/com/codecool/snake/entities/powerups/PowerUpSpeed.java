@@ -4,6 +4,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.snakes.SnakeHead2;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
@@ -27,9 +28,12 @@ public class PowerUpSpeed extends GameEntity implements Interactable {
     public void apply(SnakeHead snakeHead) {
         destroy();
         snakeHead.setSpeed();
+    }
 
-
-
+    @Override
+    public void apply(SnakeHead2 snakeHead) {
+        destroy();
+        snakeHead.setSpeed();
     }
 
     @Override
