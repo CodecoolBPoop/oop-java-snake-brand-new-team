@@ -28,13 +28,18 @@ public class Game extends Pane {
     HealthBar healthBar2;
     ScoreBar scoreBar2;
 
-    public Game() {
-        CreateSnakes();
+    public Game(int num) {
+        Globals.snakeNumbers = num;
+        if (num == 2){
+            createSnakes();
+        } else {
+            createFirstSnake();
+        }
         spawnEnemies();
 
     }
 
-    private void CreateSnakes(){
+    private void createSnakes(){
         createFirstSnake();
         createSecondSnake();
     }
@@ -165,10 +170,15 @@ public class Game extends Pane {
         Globals.gameObjects.clear();
         Globals.oldGameObjects.clear();
         Globals.newGameObjects.clear();
-        //Globals.score = 0;
+        Globals.score1 = 0;
+        Globals.score2 = 0;
         this.getChildren().clear();
 
-        CreateSnakes();
+        if (Globals.snakeNumbers == 2){
+            createSnakes();
+        } else if (Globals.snakeNumbers == 1){
+            createFirstSnake();
+        }
 
         Globals.leftKeyDown  = false;
         Globals.rightKeyDown  = false;
@@ -181,17 +191,24 @@ public class Game extends Pane {
     }
 
     public static void gameOver() {
-        if (Globals.secondSnakeDead && Globals.firstSnakeDead) {
-            Globals.gameLoop.stop();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Game Over");
-            int score1 = Globals.score1;
-            int score2 = Globals.score2;
-            alert.setHeaderText("Player 1's score: " + score1 + "\n" + "Player 2's score: " + score2);
-            String s = "Press R to Restart";
-            alert.setContentText(s);
-            alert.show();
+
+        if (Globals.snakeNumbers == 2 && Globals.secondSnakeDead && Globals.firstSnakeDead) {
+            initiateGameOver();
+        } else if (Globals.snakeNumbers == 1){
+            initiateGameOver();
         }
+    }
+
+    public static void initiateGameOver(){
+        Globals.gameLoop.stop();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        int score1 = Globals.score1;
+        int score2 = Globals.score2;
+        alert.setHeaderText("Player 1's score: " + score1 + "\n" + "Player 2's score: " + score2);
+        String s = "Press R to Restart";
+        alert.setContentText(s);
+        alert.show();
     }
 }
 

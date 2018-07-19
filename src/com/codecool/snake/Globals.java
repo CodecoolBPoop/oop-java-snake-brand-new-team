@@ -16,6 +16,7 @@ public class Globals {
     public static final double WINDOW_HEIGHT = 700;
 
     public static Image snakeHead = new Image("snake_head.png");
+    public static Image snakeHead2 = new Image("snake_head3.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image circleEnemy = new Image("circle_enemy.png");
@@ -40,6 +41,7 @@ public class Globals {
     public static GameLoop gameLoop;
     public static int score1;
     public static int score2;
+    public static int snakeNumbers;
     public static boolean  endGame;
 
     static {
