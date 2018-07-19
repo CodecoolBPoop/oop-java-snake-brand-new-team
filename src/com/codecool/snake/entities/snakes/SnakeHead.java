@@ -158,7 +158,7 @@ public class SnakeHead extends GameEntity implements Animatable, Interactable {
             for (GameEntity tails : tailList) {
                 tails.destroy();
             }
-            Globals.secondSnakeDead = true;
+            Globals.firstSnakeDead = true;
         }
 
     }
