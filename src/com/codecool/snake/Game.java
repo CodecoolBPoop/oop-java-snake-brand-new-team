@@ -17,10 +17,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends Pane {
 
     public static Timeline randomSecondSpawn;
+    public static List<Timeline> randomSecondSpawns = new ArrayList<>();
     SnakeHead snakeHead1;
     HealthBar healthBar1;
     ScoreBar scoreBar1;
@@ -28,6 +31,7 @@ public class Game extends Pane {
     SnakeHead2 snakeHead2;
     HealthBar healthBar2;
     ScoreBar scoreBar2;
+
 
     public Game(int num) {
         Globals.snakeNumbers = num;
@@ -76,11 +80,17 @@ public class Game extends Pane {
         new SimpleEnemy(Game.this);
         new CircleEnemy(Game.this);
         randomSpawn("health", 17, 20);
+        randomSecondSpawns.add(randomSecondSpawn);
         randomSpawn("simple", 3, 6);
+        randomSecondSpawns.add(randomSecondSpawn);
         randomSpawn("speed", 12, 18);
+        randomSecondSpawns.add(randomSecondSpawn);
         randomSpawn("simpleEnemy", 1, 5);
+        randomSecondSpawns.add(randomSecondSpawn);
         randomSpawn("followingEnemy", 5, 20);
+        randomSecondSpawns.add(randomSecondSpawn);
         randomSpawn("circleEnemy", 5, 10);
+        randomSecondSpawns.add(randomSecondSpawn);
     }
 
     public void randomSpawn(String toSpawn, int timeFrom, int timeTo) {
@@ -168,6 +178,9 @@ public class Game extends Pane {
 
     public void restartGame() {
         Globals.gameLoop.stop();
+        for(Timeline randomSecondSpawn: randomSecondSpawns) {
+            randomSecondSpawn.stop();
+        }
         Globals.gameObjects.clear();
         Globals.oldGameObjects.clear();
         Globals.newGameObjects.clear();
@@ -185,10 +198,7 @@ public class Game extends Pane {
         Globals.rightKeyDown  = false;
 
         start();
-        new HealthPowerup(Game.this);
-        new SimplePowerup(Game.this);
-        new PowerUpSpeed(Game.this);
-        new SimpleEnemy(Game.this);
+        spawnEnemies();
     }
 
     public static void gameOver() {
@@ -202,6 +212,9 @@ public class Game extends Pane {
 
     public static void initiateGameOver(){
         Globals.gameLoop.stop();
+        for(Timeline randomSecondSpawn: randomSecondSpawns) {
+            randomSecondSpawn.stop();
+        }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         int score1 = Globals.score1;
