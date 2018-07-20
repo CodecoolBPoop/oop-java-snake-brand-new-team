@@ -198,7 +198,15 @@ public class Game extends Pane {
         Globals.rightKeyDown  = false;
 
         start();
-        spawnEnemies();
+        for(Timeline randomSecondSpawn: randomSecondSpawns) {
+            randomSecondSpawn.playFromStart();
+        }
+        new FollowingEnemy(Game.this);
+        new HealthPowerup(Game.this);
+        new SimplePowerup(Game.this);
+        new PowerUpSpeed(Game.this);
+        new SimpleEnemy(Game.this);
+        new CircleEnemy(Game.this);
     }
 
     public static void gameOver() {
